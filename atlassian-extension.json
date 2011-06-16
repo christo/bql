@@ -1,0 +1,12 @@
+{
+	"key": 			"bql",
+	"name":			"BeerQL",
+	"description":	"A visual JQL query builder powered by beer.",
+	"version":		"1",
+	
+	"vendor": {	"name": "Joe",
+			     "url": "http://example.com/extension-homepage.html",
+		       "email": "jane@example.com" },
+
+    "screenshot":   "screenshot.png"
+}
