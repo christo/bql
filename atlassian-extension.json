@@ -4,9 +4,9 @@
 	"description":	"A visual JQL query builder powered by beer.",
 	"version":		"1",
 	
-	"vendor": {	"name": "Joe",
-			     "url": "http://example.com/extension-homepage.html",
-		       "email": "jane@example.com" },
+	"vendor": {	"name": "Fedex 17 Team 11",
+			     "url": "https://extranet.atlassian.com/display/DEV/FedEx+17+Shipment+Order+-+Visual+Issue+Queries",
+		       "email": "chris@atlassian.com" },
 
     "screenshot":   "screenshot.png"
 }
