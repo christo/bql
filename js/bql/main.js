@@ -20,7 +20,10 @@ $(document).ready(function() {
                 }
             });
         });
-        $('#jqlform').css("display", "none").after(submitButton).after(bql);
+        $('#jqlform').after(submitButton).after(bql);
+        $('#jqlform').dblclick(function() {
+            $('#jqlform').css("display", "none")
+        });
         if (!$("#iss-wrap").hasClass("lhc-collapsed")) {
             // close the left panel
             $(".toggle-lhc").click();
