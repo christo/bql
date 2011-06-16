@@ -5,7 +5,7 @@
 	"version":		"1",
 	
 	"vendor": {	"name": "Fedex 17 Team 11",
-			     "url": "https://extranet.atlassian.com/display/DEV/FedEx+17+Shipment+Order+-+Visual+Issue+Queries",
+			     "url": "https://extranet.atlassian.com/display/DEV/FedEx+17+Shipment+Order+-+BeerQL",
 		       "email": "chris@atlassian.com" },
 
     "screenshot":   "screenshot.png"

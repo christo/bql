@@ -12,6 +12,7 @@ $(document).ready(function() {
             $('#jqltext').val('assignee = scurtis or priority > major');
         });
         var submitButton = $("<button>Submit</button>").click(function() {
+            // TODO try load method
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
                 if (status == "success") {
                     $(".resultsWrap").html(resp.find(".resultsWrap"));
