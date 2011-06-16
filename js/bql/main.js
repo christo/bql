@@ -12,7 +12,13 @@ $(document).ready(function() {
             $('#jqltext').val('assignee = scurtis or priority > major');
         });
         var submitButton = $("<button>Submit</button>").click(function() {
-            $('#jqlform').submit();
+            $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
+                if (status == "success") {
+                    $(".resultsWrap").html(resp.find(".resultsWrap"));
+                } else {
+                    console.log("FAIL!!: " + resp);
+                }
+            });
         });
         $('#jqlform').css("display", "none").after(submitButton).after(bql);
         if (!$("#iss-wrap").hasClass("lhc-collapsed")) {
