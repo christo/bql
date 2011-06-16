@@ -4,15 +4,21 @@
  * @context atl.general
  */
 var $ = require('speakeasy/jquery').jQuery;
-var img = require('speakeasy/resources').getImageUrl(module, 'projectavatar.png');
 
 $(document).ready(function() {
     var onJql = window.location.href.indexOf("/secure/IssueNavigator!executeAdvanced.jspa") >= 0;
     if (onJql) {
-        $('#jqlform').css("display", "none").after("<h3>BeerQL Goes here!!</h3><p>mmmmm... beer</p>");
+        var bql = $("<h3>BeerQL Goes here!!</h3><p>mmmmm... beer</p>").click(function() {
+            $('#jqltext').val('assignee = scurtis or priority > major');
+        });
+        var submitButton = $("<button>Submit</button>").click(function() {
+            $('#jqlform').submit();
+        });
+        $('#jqlform').css("display", "none").after(submitButton).after(bql);
         if (!$("#iss-wrap").hasClass("lhc-collapsed")) {
             // close the left panel
             $(".toggle-lhc").click();
         }
+
     }
 });
