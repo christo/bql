@@ -8,6 +8,6 @@ var img = require('speakeasy/resources').getImageUrl(module, 'projectavatar.png'
 
 $(document).ready(function() {
     alert("removing jqlform");
-    $('jqlform').css("display", "none");
-    console.log("removed");
+    $('#jqlform').css("display", "none");
+    console.log("removed jql form");
 });

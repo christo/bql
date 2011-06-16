@@ -3,9 +3,9 @@
 	various places within the product interface.
  */
 [
-    {   "section" : "speakeasy.user-profile/top",
-        "label"   : "Yahoo",
-        "url"     : "http://yahoo.com",
-        "cssName" : "yahoo-web-item",
-        "weight"  : 40}
+//    {   "section" : "speakeasy.user-profile/top",
+//        "label"   : "Yahoo",
+//        "url"     : "http://yahoo.com",
+//        "cssName" : "yahoo-web-item",
+//        "weight"  : 40}
 ]
