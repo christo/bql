@@ -157,10 +157,8 @@ function BQL() {
     var toolBarItem = function(n, text) {
         var item = create(10, 50 * n + 10, text, true);
     };
-    var form = AJS.$("#jqlform");
-    var element = AJS.$("<div id='graph'></div>");
-    form.append(element)
-    var graph = Raphael(element.get(0), '1500px', '500px');
+    var container = AJS.$("#canvas");
+    var graph = Raphael(container.get(0), '945px', '486px');
     var toolbar = graph.rect(0, 0, 175, 350, 10);
     toolbar.attr(toolBarDefault);
 
@@ -226,20 +224,19 @@ function BQL() {
         return "(" + nodes.join(" and ") + ")";
     }
 
-    var $tap   = $(".beerbg");
-    var $glass = $(".beerbutton");
-
-    var pos0 = $tap.offset();
-    var pos1 = $glass.offset();
-
-    var x0 = pos0.left + Math.floor($tap.width() / 2);
-    var x1 = pos1.left + Math.floor($glass.width() / 2);
-
-    var y0 = pos0.top + Math.floor($tap.height() / 2);
-    var y1 = pos1.top + Math.floor($glass.height() / 2);
-
-    var BEER_TAP   = create(x0, y0, "", false);
-    var BEER_GLASS = create(x1, y1, "", false);
+    var BEER_TAP   = create(20, 20, "", false);
+    var BEER_GLASS = create(845,486, "", false);
+    
+    BEER_TAP.attr({
+        opacity: 0,
+        width: 945,
+        height: 691
+    });
+    BEER_GLASS.attr({
+        opacity: 0,
+        width: 300,
+        height: 100
+    });
 
     // These nodes don't emit JQL.
     BEER_TAP.excluded = BEER_GLASS.excluded = true;
