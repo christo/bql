@@ -7,6 +7,7 @@ function BQL() {
     var itemRelatedDefaults = {fill: "blue", opacity: 0.8, "stroke-width": 3};
     var textDefaults = {fill: "#000", font: '15 Arial'};
     var textDelta = {x: 50, y: 15};
+    var linkDefaults = {stroke: "orange", "stroke-width": 4};
     var items = ["Project", "Issue Type", "Reporter", "Assignee", "Summary", "Description", "Status"];
     var links = [];
     var selected;
@@ -107,6 +108,7 @@ function BQL() {
         } else {
             link = graph.path('M ' + centerItem1 + ' ' + item1.attr('y') + 'L' + centerItem2 + ' ' + (item2.attr('y') + item2.attr('height')));
         }
+        link.animate(linkDefaults, 200);
         link.inc = item1;
         link.out = item2;
         links.push(link);
