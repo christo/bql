@@ -225,7 +225,7 @@ function BQL() {
                 parts.push(gettext(nodes[i]));
             }
         }
-        return "(" + nodes.join(" and ") + ")";
+        return "(" + parts.join(" and ") + ")";
     }
 
     var BEER_TAP   = create(400,   0, "", false, true);
