@@ -221,7 +221,8 @@
     function getPathSource(nodes) {
         var parts = [];
         for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i].text.attr('text')) {
+            // Assume nodes that don't emit JQL have an "excluded" property.
+            if (!nodes[i].excluded) {
                 parts.push(nodes[i].text.attr('text'));
             }
         }
