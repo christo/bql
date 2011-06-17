@@ -221,8 +221,8 @@
     function getPathSource(nodes) {
         var parts = [];
         for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i].text) {
-                parts.push(nodes[i].text);
+            if (nodes[i].text.attr('text')) {
+                parts.push(nodes[i].text.attr('text'));
             }
         }
         return "(" + nodes.join(" and ") + ")";
