@@ -3723,5 +3723,3 @@
 
     oldRaphael.was ? (win.Raphael = R) : (Raphael = R);
 })();
-
-exports.Raphael = Raphael;
