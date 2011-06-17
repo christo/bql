@@ -12,47 +12,51 @@ function BQL() {
     var links = [];
     var selected;
 
-    var create = function(x, y, s, inToolbar) {
+    var create = function(x, y, s, inToolbar, noEvents) {
         var text = graph.text(x + textDelta.x, y + textDelta.y, s);
         text.attr(textDefaults);
         var item = graph.rect(x, y, 150, 30);
         item.attr(itemDefaults);
         item.text = text; // allow to retrieve the internal text element
 
-        item.hover(function() {
-            item.attr(itemHoverDefaults);
-        }).mouseout(function() {
-            if (item != selected) {
-                item.attr(itemDefaults);
-            }
-        });
+        if (!noEvents) {
+            item.hover(function() {
+                item.attr(itemHoverDefaults);
+            }).mouseout(function() {
+                if (item != selected) {
+                    item.attr(itemDefaults);
+                }
+            });
+        }
         if (!inToolbar) {
             item.terminal = {field: s, operator: '=', value: '?'};
             formatTerminal(item);
-            item.click(function() {
-                var connectedNodes = traverseFrom(item);
-                var connectedStyle = itemDefaults;
-                if (selected == null) {
-                    selected = item;
-                    item.attr(itemSelectedDefaults);
-                    connectedStyle = itemRelatedDefaults;
-                } else if (selected == item) { // if selected = self, unselect
-                    selected = null;
-                    item.attr(itemHoverDefaults);
-                } else {
-                    selected.attr(itemDefaults);
-                    createLink(selected, item);
-                    selected = null;
-                }
-                for (var i = 0; i < connectedNodes.length; i++) {
-                    connectedNodes[i].attr(connectedStyle);
-                }
-            }).dblclick(function() {
-                changeTerminal(this);
-            })
+            if (!noEvents) {
+                item.click(function() {
+                    var connectedNodes = traverseFrom(item);
+                    var connectedStyle = itemDefaults;
+                    if (selected == null) {
+                        selected = item;
+                        item.attr(itemSelectedDefaults);
+                        connectedStyle = itemRelatedDefaults;
+                    } else if (selected == item) { // if selected = self, unselect
+                        selected = null;
+                        item.attr(itemHoverDefaults);
+                    } else {
+                        selected.attr(itemDefaults);
+                        createLink(selected, item);
+                        selected = null;
+                    }
+                    for (var i = 0; i < connectedNodes.length; i++) {
+                        connectedNodes[i].attr(connectedStyle);
+                    }
+                }).dblclick(function() {
+                    changeTerminal(this);
+                });
+            }
         }
 
-        enableDrag(item, inToolbar);
+        if (!noEvents) enableDrag(item, inToolbar);
         return item;
     };
     var move = function(x, y, item) {
@@ -224,8 +228,8 @@ function BQL() {
         return "(" + nodes.join(" and ") + ")";
     }
 
-    var BEER_TAP   = create(400, 0, "", false);
-    var BEER_GLASS = create(400,400, "", false);
+    var BEER_TAP   = create(400,   0, "", false, true);
+    var BEER_GLASS = create(400, 400, "", false, true);
     
     BEER_TAP.attr({
         opacity: 0,
