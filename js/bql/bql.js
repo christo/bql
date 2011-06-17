@@ -213,6 +213,19 @@ function BQL() {
         }
         return "(" + nodes.join(" and ") + ")";
     }
+
+    var p0 = $("#").offset();
+    var p1 = $("#").offset();
+
+    var BEER_TAP   = create(p0.top, p0.left);
+    var BEER_GLASS = create(p1.top, p1.left);
+
+    // These nodes don't emit JQL.
+    BEER_TAP.excluded = BEER_GLASS.excluded = true;
+
+    return function() {
+        return getJQLSource(BEER_TAP, BEER_GLASS);
+    };
 }
 
 exports.BQL = BQL;

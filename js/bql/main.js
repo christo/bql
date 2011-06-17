@@ -7,12 +7,13 @@ var $ = require('speakeasy/jquery').jQuery,
     BQL = require('./bql').bql;
 
 $(document).ready(function() {
-    BQL();
+    var getJQLSource = BQL();
     var onJql = $("#jqlform");
     if (onJql.length) {
         $('<img class="beerbg" src="http://seancurtis.com/beerbg.png" style="margin-top: -100px; position: relative; z-index: 9998;">').insertAfter('#jqlform');
 
         $('<buttonclass="beerbutton" style="position: absolute; height: 82px; top: -41px; left: 422px; width: 90px; border: 0pt none; cursor: pointer; opacity: 0; z-index: 9999;" title="Pull Beer!"> Pull Beer! </button>').click(function() {
+            $("#jqltext").val(getJQLSource());
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
                 if (status == "success") {
                     $(".results-wrap").replaceWith($(resp).find(".results-wrap"));
