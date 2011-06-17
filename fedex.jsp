@@ -37,7 +37,7 @@
     var links = [];
     var selected;
 
-    var create = function(x, y, s, selectable, copyAfterDrag) {
+    var create = function(x, y, s, inToolbar) {
         var text = graph.text(x + textDelta.x, y + textDelta.y, s);
         text.attr(textDefaults);
         var item = graph.rect(x, y, 150, 30);
@@ -51,7 +51,9 @@
                 item.attr(itemDefaults);
             }
         });
-        if (selectable) {
+        if (!inToolbar) {
+            item.terminal = {field: s, operator: '=', value: '?'};
+            formatTerminal(item);
             item.click(function() {
                 if (selected == null) {
                     selected = item;
@@ -63,12 +65,13 @@
                     selected.attr(itemDefaults);
                     createLink(selected, item);
                     selected = null;
-                    //item.attr(itemSelectedDefaults);
                 }
-            });
+            }).dblclick(function() {
+                changeTerminal(this);
+            })
         }
 
-        enableDrag(item, copyAfterDrag);
+        enableDrag(item, inToolbar);
         return item;
     };
     var move = function(x, y, item) {
@@ -84,14 +87,6 @@
     };
     var formatTerminal = function(item) {
         return settext(item, item.terminal.field + ' ' + item.terminal.operator + ' ' + item.terminal.value);
-    };
-    var createAlterable = function(x, y, s) {
-        var item = create(x, y, s, true, false);
-        item.terminal = {field: s, operator: '=', value: '?'};
-        formatTerminal(item);
-        item.dblclick(function() {
-            changeTerminal(this);
-        })
     };
     var changeTerminal = function(item) {
         item.terminal.value = prompt('Enter new value for ' + item.terminal.field);
@@ -115,7 +110,7 @@
                 move(item.x, item.y, item);
                 // create a new item at the target pos
                 item.attr({opacity: .5, x : item.x, y : item.y});
-                createAlterable(dragPos.x, dragPos.y, gettext(item));
+                create(dragPos.x, dragPos.y, gettext(item), false);
             }
             updateLinks(item);
         };
@@ -178,7 +173,7 @@
 
     };
     var toolBarItem = function(n, text) {
-        var item = create(10, 50 * n + 10, text, false, true);
+        var item = create(10, 50 * n + 10, text, true);
     };
 
     var graph = Raphael('graph', '1500px', '500px');
