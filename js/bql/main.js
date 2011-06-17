@@ -4,7 +4,7 @@
  * @context atl.general
  */
 var $ = require('speakeasy/jquery').jQuery,
-    BQL = require('./bql').bql;
+    BQL = require('./bql').BQL;
 
 $(document).ready(function() {
     var getJQLSource = BQL();
