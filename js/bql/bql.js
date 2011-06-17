@@ -4,6 +4,7 @@ function BQL() {
     var itemDefaults = {fill: 'grey', opacity: 0.8, stroke: 'black', "fill-opacity": 0.5, "stroke-width": 2, cursor: "move"};
     var itemHoverDefaults = {fill: "blue", opacity: 1.0};
     var itemSelectedDefaults = {fill: "blue", opacity: 1.0, "stroke-width": 3};
+    var itemRelatedDefaults = {fill: "blue", opacity: 0.8, "stroke-width": 3};
     var textDefaults = {fill: "#000", font: '15 Arial'};
     var textDelta = {x: 50, y: 15};
     var items = ["Project", "Issue Type", "Reporter", "Assignee", "Summary", "Description", "Status"];
@@ -28,9 +29,12 @@ function BQL() {
             item.terminal = {field: s, operator: '=', value: '?'};
             formatTerminal(item);
             item.click(function() {
+                var connectedNodes = traverseFrom(item);
+                var connectedStyle = itemDefaults;
                 if (selected == null) {
                     selected = item;
                     item.attr(itemSelectedDefaults);
+                    connectedStyle = itemRelatedDefaults;
                 } else if (selected == item) { // if selected = self, unselect
                     selected = null;
                     item.attr(itemHoverDefaults);
@@ -38,6 +42,9 @@ function BQL() {
                     selected.attr(itemDefaults);
                     createLink(selected, item);
                     selected = null;
+                }
+                for (var i = 0; i < connectedNodes.length; i++) {
+                    connectedNodes[i].attr(connectedStyle);
                 }
             }).dblclick(function() {
                 changeTerminal(this);
@@ -211,7 +218,7 @@ function BQL() {
         for (var i = 0; i < nodes.length; i++) {
             // Assume nodes that don't emit JQL have an "excluded" property.
             if (!nodes[i].excluded) {
-                parts.push(nodes[i].text.attr('text'));
+                parts.push(gettext(nodes[i]));
             }
         }
         return "(" + nodes.join(" and ") + ")";
