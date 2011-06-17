@@ -201,7 +201,7 @@
     // Call this one!
     // $("#jqltext").val(getJQLSource(BEER_TAP, BEER_GLASS));
     function getJQLSource(startNode, endNode) {
-        return step([startNode], endNode);
+        return step([startNode], endNode).join(" or ") + " order by key desc";
     }
 
     function step(visited, terminator) {
@@ -219,7 +219,7 @@
                 output = output.concat(step(visited.concat(nodes[i]), terminator));
             }
         }
-        return output.join(" or ") + " order by key desc";
+        return output;
     }
 
     function traverseFrom(node) {
@@ -235,7 +235,8 @@
     function getPathSource(nodes) {
         var parts = [];
         for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i].text.attr('text')) {
+            // Assume nodes that don't emit JQL have an "excluded" property.
+            if (!nodes[i].excluded) {
                 parts.push(nodes[i].text.attr('text'));
             }
         }
