@@ -31,29 +31,27 @@ function BQL() {
         if (!inToolbar) {
             item.terminal = {field: s, operator: '=', value: '?'};
             formatTerminal(item);
-            if (!noEvents) {
-                item.click(function() {
-                    var connectedNodes = traverseFrom(item);
-                    var connectedStyle = itemDefaults;
-                    if (selected == null) {
-                        selected = item;
-                        item.attr(itemSelectedDefaults);
-                        connectedStyle = itemRelatedDefaults;
-                    } else if (selected == item) { // if selected = self, unselect
-                        selected = null;
-                        item.attr(itemHoverDefaults);
-                    } else {
-                        selected.attr(itemDefaults);
-                        createLink(selected, item);
-                        selected = null;
-                    }
-                    for (var i = 0; i < connectedNodes.length; i++) {
-                        connectedNodes[i].attr(connectedStyle);
-                    }
-                }).dblclick(function() {
-                    changeTerminal(this);
-                });
-            }
+            item.click(function() {
+                var connectedNodes = traverseFrom(item);
+                var connectedStyle = itemDefaults;
+                if (selected == null) {
+                    selected = item;
+                    if (!noEvents) item.attr(itemSelectedDefaults);
+                    connectedStyle = itemRelatedDefaults;
+                } else if (selected == item) { // if selected = self, unselect
+                    selected = null;
+                    if (!noEvents) item.attr(itemHoverDefaults);
+                } else {
+                    if (!noEvents) selected.attr(itemDefaults);
+                    createLink(selected, item);
+                    selected = null;
+                }
+                for (var i = 0; i < connectedNodes.length; i++) {
+                    if (!noEvents) connectedNodes[i].attr(connectedStyle);
+                }
+            }).dblclick(function() {
+                if (!noEvents) changeTerminal(this);
+            });
         }
 
         if (!noEvents) enableDrag(item, inToolbar);
