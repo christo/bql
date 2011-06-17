@@ -1,33 +1,4 @@
-<%@ taglib prefix="ww" uri="webwork" %>
-<%@ taglib prefix="aui" uri="webwork" %>
-<html>
-<head>
-    <meta content="message" name="decorator"/>
-    <title>Fedex</title>
-
-    <script type="text/javascript" src="raphael-min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-</head>
-<body>
-
-<div id="toolbar" style="display:none;">
-    <div dir="toolbar-section">People</div>
-    <div dir="toolbar-item">Assignee</div>
-    <div dir="toolbar-item">Reporter</div>
-
-    <div dir="toolbar-section">People</div>
-
-    <div dir="toolbar-section">People</div>
-
-
-</div>
-
-<div id="graph">
-
-</div>
-
-
-<script type="text/javascript">
+function BQL() {
     var toolBarDefault = {stroke: "#000", "stroke-width": 2, fill: "#fff" };
     var itemDefaults = {fill: 'grey', opacity: 0.8, stroke: 'black', "fill-opacity": 0.5, "stroke-width": 2, cursor: "move"};
     var itemHoverDefaults = {fill: "blue", opacity: 1.0};
@@ -242,9 +213,6 @@
         }
         return "(" + nodes.join(" and ") + ")";
     }
+}
 
-</script>
-
-
-</body>
-</html>
+exports.BQL = BQL;
