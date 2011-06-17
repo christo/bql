@@ -4,7 +4,7 @@
  * @context atl.general
  */
 var $ = require('speakeasy/jquery').jQuery,
-    BQL = require('./bql').bql;
+    BQL = require('./bql').BQL;
 
 $(document).ready(function() {
     var getJQLSource = BQL();
@@ -12,7 +12,7 @@ $(document).ready(function() {
     if (onJql.length) {
         $('<img class="beerbg" src="http://seancurtis.com/beerbg.png" style="margin-top: -100px; position: relative; z-index: 9998;">').insertAfter('#jqlform');
 
-        $('<buttonclass="beerbutton" style="position: absolute; height: 82px; top: -41px; left: 422px; width: 90px; border: 0pt none; cursor: pointer; opacity: 0; z-index: 9999;" title="Pull Beer!"> Pull Beer! </button>').click(function() {
+        $('<button class="beerbutton" style="position: absolute; height: 82px; top: -41px; left: 422px; width: 90px; border: 0pt none; cursor: pointer; opacity: 0; z-index: 9999;" title="Pull Beer!"> Pull Beer! </button>').click(function() {
             $("#jqltext").val(getJQLSource());
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
                 if (status == "success") {
