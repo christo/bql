@@ -1,4 +1,5 @@
 function BQL() {
+    var $ = AJS.$;
     var toolBarDefault = {stroke: "#000", "stroke-width": 2, fill: "#fff" };
     var itemDefaults = {fill: 'grey', opacity: 0.8, stroke: 'black', "fill-opacity": 0.5, "stroke-width": 2, cursor: "move"};
     var itemHoverDefaults = {fill: "blue", opacity: 1.0};
@@ -147,8 +148,10 @@ function BQL() {
     var toolBarItem = function(n, text) {
         var item = create(10, 50 * n + 10, text, true);
     };
-
-    var graph = Raphael('graph', '1500px', '500px');
+    var form = AJS.$("#jqlform");
+    var element = AJS.$("<div id='graph'></div>");
+    form.append(element)
+    var graph = Raphael(element.get(0), '1500px', '500px');
     var toolbar = graph.rect(0, 0, 175, 350, 10);
     toolbar.attr(toolBarDefault);
 
