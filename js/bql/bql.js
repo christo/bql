@@ -158,7 +158,7 @@ function BQL() {
         var item = create(10, 50 * n + 10, text, true);
     };
     var container = AJS.$("#canvas");
-    var graph = Raphael(container.get(0), '945px', '486px');
+    var graph = Raphael(container.get(0), '945px', '600px');
     var toolbar = graph.rect(0, 0, 175, 350, 10);
     toolbar.attr(toolBarDefault);
 
@@ -224,18 +224,18 @@ function BQL() {
         return "(" + nodes.join(" and ") + ")";
     }
 
-    var BEER_TAP   = create(20, 20, "", false);
-    var BEER_GLASS = create(845,486, "", false);
+    var BEER_TAP   = create(400, 0, "", false);
+    var BEER_GLASS = create(400,400, "", false);
     
     BEER_TAP.attr({
         opacity: 0,
-        width: 945,
-        height: 691
+        width: 100,
+        height: 100
     });
     BEER_GLASS.attr({
         opacity: 0,
-        width: 300,
-        height: 100
+        width: 100,
+        height: 200
     });
 
     // These nodes don't emit JQL.

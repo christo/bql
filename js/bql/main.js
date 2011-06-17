@@ -7,7 +7,6 @@ var $ = require('speakeasy/jquery').jQuery,
     BQL = require('./bql').BQL;
 
 $(document).ready(function() {
-    var getJQLSource = BQL();
     var onJql = $("#jqlform");
     if (onJql.length) {
         $(".item-summary").remove();
@@ -25,9 +24,8 @@ $(document).ready(function() {
         
         beerButton.click(function() {
             $("#jqltext").val(getJQLSource());
-            var throb = $('<img src="'+contextPath+'/images/throbber/wait.gif" width="16" height="16"/>').appendTo("body").offset({top: 115, left: 482});
+            var throb = $('<img src="'+contextPath+'/images/throbber/wait.gif" width="16" height="16"/>').appendTo("body").offset({top: 115, left: 462});
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
-                throb.remove();
                 if (status == "success") {
                     $(".results-wrap").replaceWith($(resp).find(".results-wrap"));
                 } else {
@@ -43,5 +41,6 @@ $(document).ready(function() {
             // close the left panel
             $(".toggle-lhc").click();
         }
+        var getJQLSource = BQL();
     }
 });
