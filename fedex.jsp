@@ -136,7 +136,6 @@
         link.out = item2;
         links.push(link);
 
-
         link.click(function() {
             this.attr (toolBarDefault); // TODO: remvoe
         });
@@ -189,6 +188,51 @@
     for(var i = 0; i < items.length; i++) {
         toolBarItem(i, items[i]);
     }
+
+    // Call this one!
+    // $("#jqltext").val(getJQLSource(BEER_TAP, BEER_GLASS));
+    function getJQLSource(startNode, endNode) {
+        return step([startNode], endNode);
+    }
+
+    function step(visited, terminator) {
+        var nodes = traverseFrom(visited[visited.length - 1]);
+        var output = [];
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i] === terminator) {
+                // We're done. Emit output.
+                output.push(getPathSource(visited.concat(nodes[i])));
+            } else if (visited.indexOf(nodes[i]) >= 0) {
+                // Terminate at cycle.
+                console.warn("Cycle detected! Path ignored.");
+            } else {
+                // Add new path.
+                output = output.concat(step(visited.concat(nodes[i]), terminator));
+            }
+        }
+        return output.join(" or ") + " order by key desc";
+    }
+
+    function traverseFrom(node) {
+        var outNodes = [];
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].inc === node) {
+                outNodes.push(links[i].out);
+            }
+        }
+        return outNodes;
+    }
+
+    function getPathSource(nodes) {
+        var parts = [];
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].text) {
+                parts.push(nodes[i].text);
+            }
+        }
+        return "(" + nodes.join(" and ") + ")";
+    }
+
 </script>
 
 
