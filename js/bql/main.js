@@ -15,6 +15,7 @@ $(document).ready(function() {
             $("#jqltext").val(getJQLSource());
             var throb = $('<img src="'+contextPath+'/images/throbber/wait.gif" width="16" height="16"/>').appendTo("body").offset({top: 115, left: 462});
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
+                throb.remove();
                 if (status == "success") {
                     $(".results-wrap").replaceWith($(resp).find(".results-wrap"));
                 } else {
