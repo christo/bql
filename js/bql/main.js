@@ -7,7 +7,6 @@ var $ = require('speakeasy/jquery').jQuery,
     BQL = require('./bql').BQL;
 
 $(document).ready(function() {
-    var getJQLSource = BQL();
     var onJql = $("#jqlform");
     if (onJql.length) {
         $('<img class="beerbg" src="http://seancurtis.com/beerbg.png" style="margin-top: -100px; position: relative; z-index: 9998;">').insertAfter('#jqlform');
@@ -30,6 +29,6 @@ $(document).ready(function() {
             // close the left panel
             $(".toggle-lhc").click();
         }
-
+        var getJQLSource = BQL();
     }
 });

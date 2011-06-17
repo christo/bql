@@ -217,11 +217,20 @@ function BQL() {
         return "(" + nodes.join(" and ") + ")";
     }
 
-    var p0 = $(".beerbg").offset();
-    var p1 = $(".beerbutton").offset();
+    var $tap   = $(".beerbg");
+    var $glass = $(".beerbutton");
 
-    var BEER_TAP   = create(p0.top, p0.left, "", false);
-    var BEER_GLASS = create(p1.top, p1.left, "", false);
+    var pos0 = $tap.offset();
+    var pos1 = $glass.offset();
+
+    var x0 = pos0.left + Math.floor($tap.width() / 2);
+    var x1 = pos1.left + Math.floor($glass.width() / 2);
+
+    var y0 = pos0.top + Math.floor($tap.height() / 2);
+    var y1 = pos1.top + Math.floor($glass.height() / 2);
+
+    var BEER_TAP   = create(x0, y0, "", false);
+    var BEER_GLASS = create(x1, y1, "", false);
 
     // These nodes don't emit JQL.
     BEER_TAP.excluded = BEER_GLASS.excluded = true;
