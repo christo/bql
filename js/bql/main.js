@@ -12,11 +12,9 @@ $(document).ready(function() {
             $('#jqltext').val('assignee = scurtis or priority > major');
         });
         var submitButton = $("<button> Pull Beer! </button>").click(function() {
-            // TODO try load method
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
                 if (status == "success") {
-                    alert(resp.find(".resultsWrap"));
-                    $(".resultsWrap").replaceWith($(resp).find(".resultsWrap"));
+                    $(".results-wrap").replaceWith($(resp).find(".results-wrap"));
                 } else {
                     console.log("FAIL!!: " + resp);
                 }
