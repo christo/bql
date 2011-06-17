@@ -157,11 +157,11 @@ function BQL() {
 
     };
     var toolBarItem = function(n, text) {
-        var item = create(10, 50 * n + 40, text, true);
+        var item = create(10, 50 * n + 10, text, true);
     };
     var container = AJS.$("#canvas");
     var graph = Raphael(container.get(0), '945px', '600px');
-    var toolbar = graph.rect(0, 30, 175, 350, 10);
+    var toolbar = graph.rect(0, 0, 175, 350, 10);
     toolbar.attr(toolBarDefault);
 
     for(var i = 0; i < items.length; i++) {
