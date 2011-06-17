@@ -187,7 +187,7 @@
     // Call this one!
     // $("#jqltext").val(getJQLSource(BEER_TAP, BEER_GLASS));
     function getJQLSource(startNode, endNode) {
-        return step([startNode], endNode);
+        return step([startNode], endNode).join(" or ") + " order by key desc";
     }
 
     function step(visited, terminator) {
@@ -205,7 +205,7 @@
                 output = output.concat(step(visited.concat(nodes[i]), terminator));
             }
         }
-        return output.join(" or ") + " order by key desc";
+        return output;
     }
 
     function traverseFrom(node) {
