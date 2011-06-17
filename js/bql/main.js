@@ -3,9 +3,11 @@
  *
  * @context atl.general
  */
-var $ = require('speakeasy/jquery').jQuery;
+var $ = require('speakeasy/jquery').jQuery,
+    BQL = require('./bql').bql;
 
 $(document).ready(function() {
+    BQL();
     var onJql = window.location.href.indexOf("/secure/IssueNavigator!executeAdvanced.jspa") >= 0;
     if (onJql) {
         var bql = $("<h3>BeerQL Goes here!!</h3><p>mmmmm... beer</p>").click(function() {
