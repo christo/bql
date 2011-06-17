@@ -13,6 +13,7 @@ $(document).ready(function() {
 
         $('<button class="beerbutton" style="position: absolute; height: 82px; top: -41px; left: 422px; width: 90px; border: 0pt none; cursor: pointer; opacity: 0; z-index: 9999;" title="Pull Beer!"> Pull Beer! </button>').click(function() {
             $("#jqltext").val(getJQLSource());
+            var throb = $('<img src="'+contextPath+'/images/throbber/wait.gif" width="16" height="16"/>').appendTo("body").offset({top: 115, left: 462});
             $.post("IssueNavigator!executeAdvanced.jspa", $("#jqlform").serialize(), function(resp, status) {
                 if (status == "success") {
                     $(".results-wrap").replaceWith($(resp).find(".results-wrap"));
