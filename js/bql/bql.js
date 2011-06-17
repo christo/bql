@@ -149,12 +149,25 @@ function BQL() {
     };
 
     var graph = Raphael('graph', '1500px', '500px');
-    var toolbar = graph.rect(0, 0, 175, 350, 5);
+    var toolbar = graph.rect(0, 0, 175, 350, 10);
     toolbar.attr(toolBarDefault);
 
     for(var i = 0; i < items.length; i++) {
         toolBarItem(i, items[i]);
     }
+    $("#graph").keydown(function (event) {
+        var key = event.which;
+        if (key == 8 || key == 46) {
+            var item = selected;
+            if (item != null) {
+                var ll = hideLinks(item);
+                for (var i = 0; i < ll.length; i++) {
+                    ll[i].remove();
+                }
+            }
+            event.preventDefault();
+        }
+    });
 
     // Call this one!
     // $("#jqltext").val(getJQLSource(BEER_TAP, BEER_GLASS));
