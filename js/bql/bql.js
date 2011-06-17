@@ -214,11 +214,11 @@ function BQL() {
         return "(" + nodes.join(" and ") + ")";
     }
 
-    var p0 = $("#").offset();
-    var p1 = $("#").offset();
+    var p0 = $(".beerbg").offset();
+    var p1 = $(".beerbutton").offset();
 
-    var BEER_TAP   = create(p0.top, p0.left);
-    var BEER_GLASS = create(p1.top, p1.left);
+    var BEER_TAP   = create(p0.top, p0.left, "", false);
+    var BEER_GLASS = create(p1.top, p1.left, "", false);
 
     // These nodes don't emit JQL.
     BEER_TAP.excluded = BEER_GLASS.excluded = true;
